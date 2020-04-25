@@ -5,23 +5,26 @@ class Board extends React.Component {
         super(props);
     }
     render() {
+        const cell =(i)=> <td className="cell" onClick={() => this.props.handleClick(i)}>{this.props.squares[i]}</td>
         const border = (
             <table>
-                <tr>
-                    <td className="cell"></td>
-                    <td className="cell"></td>
-                    <td className="cell"></td>
-                </tr>
-                <tr>
-                    <td className="cell"></td>
-                    <td className="cell"></td>
-                    <td className="cell"></td>
-                </tr>
-                <tr>
-                    <td className="cell"></td>
-                    <td className="cell"></td>
-                    <td className="cell"></td>
-                </tr>
+                <tbody>
+                    <tr>
+                        {cell(0)}
+                        {cell(1)}
+                        {cell(2)}
+                    </tr>
+                    <tr>
+                        {cell(3)}
+                        {cell(4)}
+                        {cell(5)}
+                    </tr>
+                    <tr>
+                        {cell(6)}
+                        {cell(7)}
+                        {cell(8)}
+                    </tr>
+                </tbody>
             </table>
         );
         return (
