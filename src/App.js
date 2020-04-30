@@ -44,15 +44,15 @@ class App extends React.Component {
       count, 
       exceed 
     };
-    //クリックしたら、セルに○、×を入れる。=>stateを更新する。=>勝敗判定をする。=>終了判定をする。
-    this.handleClick = this.handleClick.bind(this);
   };
 
-  handleClick(i){
+  handleClick=(i) => {
     const squares = this.state.squares.slice();
-    const xIsNext = this.state.xIsNext
-    const exceed = this.state.exceed
-    const count = this.state.count
+    const {
+      xIsNext,
+      exceed,
+      count
+    }= this.state
 
     //プレー続行判定、同じ場所か判定
     if (!exceed || squares[i]) {
@@ -60,8 +60,8 @@ class App extends React.Component {
     }
 
     //プレイヤー判定し、squares[i]に入れる。
-    this.checkedPlayer(squares,xIsNext,i)
-
+    squares[i] = xIsNext ? activePlayer.maru : activePlayer.batsu
+    
     //state変更
     this.setState({
       squares: squares,
@@ -72,21 +72,17 @@ class App extends React.Component {
     // 勝敗判定. 'o'or'x'かnull
     const winner =
     this.checkedWinner(squares)
-
+    
     //nullでなければ勝負終了。
     if (winner) {
       this.setState({
-        exceed: false
+        exceed: !exceed
       });
     }
   }
 
-  checkedPlayer(s,x,i){
-    return s[i] = (x === true) ? activePlayer.maru : activePlayer.batsu
-  }
-
-
-  checkedWinner(s) {
+  checkedWinner(squares) {
+    let winner=null;
     const lines =[
       [0, 1, 2],
       [3, 4, 5],
@@ -97,16 +93,15 @@ class App extends React.Component {
       [0, 4, 8],
       [2, 4, 6],
     ];
-    for(let i =0; i<lines.length; i++){
-      const [a,b,c]=lines[i];
-      if (s[a] && s[a] ===s[b]&&s[a]===s[c]){
-        return s[a]
-      }
-    }
-    return null
+    lines.forEach((line)=>{
+      const [a, b, c] = line;
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {    
+        winner = squares[a]
+        }
+    })
+    return winner
   }
 
-  
   handleResetClick = () => {
     const { squares, xIsNext,count, exceed}=initalState
       this.setState({
@@ -118,12 +113,13 @@ class App extends React.Component {
   }
 
   render() {
+    const {squares,xIsNext,count,exceed}=this.state
     return (
       <Main>
         <Header name="Tic Tac Toe" />
-        <Player xIsNext={this.state.xIsNext} />
-        <Board squares={this.state.squares} xIsNext={this.state.xIsNext} count={this.state.count} handleClick={this.handleClick}/>
-        <Result exceed={this.state.exceed} xIsNext={this.state.xIsNext} count={this.state.count}/>
+        <Player xIsNext={xIsNext} />
+        <Board squares={squares} xIsNext={xIsNext} count={count} handleClick={this.handleClick}/>
+        <Result exceed={exceed} xIsNext={xIsNext} count={count}/>
         <Button handleClick={this.handleResetClick} />
       </Main>
     );
