@@ -1,4 +1,5 @@
 import React from 'react';
+import Cell from './Cell';
 import styled from 'styled-components';
 
 
@@ -12,43 +13,15 @@ const Table = styled.table`
     border-collapse: collapse;
     margin: 0 auto;
 `;
-const Cell = styled.td`
-    border: solid 2px black;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 25px;    
-`;
-
 
 function Board (props) {
-    const cell =(i)=> <Cell onClick={() => props.handleClick(i)}>{props.squares[i]}</Cell>
-    const border = (
-        <Table>
-            <tbody>
-                <tr>
-                    {cell(0)}
-                    {cell(1)}
-                    {cell(2)}
-                </tr>
-                <tr>
-                    {cell(3)}
-                    {cell(4)}
-                    {cell(5)}
-                </tr>
-                <tr>
-                    {cell(6)}
-                    {cell(7)}
-                    {cell(8)}
-                </tr>
-            </tbody>
-        </Table>
-    );
+    const { squares, xIsNext, count, handleClick } =props
     return (
         <Blank>
             <Lboard>
-                {border}
+                <Table>
+                    <Cell squares={squares} xIsNext={xIsNext} count={count} handleClick={handleClick} />
+                </Table>
             </Lboard>
         </Blank>
     );
