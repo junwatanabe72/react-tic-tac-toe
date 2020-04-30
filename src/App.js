@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
 
 //components
-import Header from './modules/Header';
-import Player from './modules/Player';
-import Board from './modules/Board';
-import Result from './modules/Result';
-import Button from './modules/Button';
+import Header from './components/Header';
+import Player from './components/Player';
+import Board from './components/Board';
+import Result from './components/Result';
+import Button from './components/Button';
 
 //style
 import styled from 'styled-components';
-// import logo from './logo.svg';
-// import './App.css';
 
 
 //定数
 const activePlayer = {
   maru: '○',
   batsu: '×'
+}
+
+const initalState ={
+    squares: Array(9).fill(null),//盤面の状況
+    xIsNext: true, //trueの場合は○,falseは×
+    count: 0, //ターン数。引き分け判定のため
+    exceed: true //ゲームの終了判定。falseでゲーム終了。
 }
 
 //style
@@ -31,17 +36,16 @@ const Main = styled.div`
 //comppnent
 class App extends React.Component {
   constructor(props) {
+    const { squares, xIsNext, count, exceed } = initalState
     super(props);
     this.state={
-      squares: Array(9).fill(null), //盤面の状況
-      xIsNext: true,  //trueの場合は○,falseは×
-      count: 0, //ターン数。引き分け判定のため
-      exceed: true //ゲームの終了判定。falseでゲーム終了。
+      squares, 
+      xIsNext, 
+      count, 
+      exceed 
     };
     //クリックしたら、セルに○、×を入れる。=>stateを更新する。=>勝敗判定をする。=>終了判定をする。
     this.handleClick = this.handleClick.bind(this);
-    //リセットする。
-    this.handleResetClick = this.handleResetClick.bind(this);
   };
 
   handleClick(i){
@@ -102,13 +106,14 @@ class App extends React.Component {
     return null
   }
 
-  //初期化関数
-  handleResetClick() {
-    this.setState({
-      squares: Array(9).fill(null),
-      xIsNext: true,
-      count: 0,
-      exceed: true
+  
+  handleResetClick = () => {
+    const { squares, xIsNext,count, exceed}=initalState
+      this.setState({
+        squares,
+        xIsNext,
+        count,
+        exceed
     });
   }
 
