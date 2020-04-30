@@ -8,31 +8,24 @@ const Lplayer = styled.div`
     justify-content: center;
 `;
 //○プレイヤーのデザイン
-const ActivePlayerMaru = styled.div`
-    padding: 16px;
-    border-bottom: solid 2px;
-`;
 const PlayerMaru = styled.div`
     padding: 16px;
-`;
-//×プレイヤーのデザイン
-const ActivePlayerBatsu = styled.div`
-    padding: 16px;
-    border-bottom: solid 2px;
+    border-bottom: ${props => props.active ? "solid 2px" : ""};
 `;
 const PlayerBatsu = styled.div`
     padding: 16px;
+    border-bottom: ${props => props.active ? "solid 2px" : ""};
 `;
 
 function Player(props){
         
     const check = props.xIsNext
-    let maruPlayer = <ActivePlayerMaru>○</ActivePlayerMaru>
+    let maruPlayer = <PlayerMaru active>○</PlayerMaru>
     let batsuPlayer = <PlayerBatsu>×</PlayerBatsu>
 
         if (!check) {
             maruPlayer = <PlayerMaru>○</PlayerMaru>
-            batsuPlayer = <ActivePlayerBatsu>×</ActivePlayerBatsu>
+            batsuPlayer = <PlayerBatsu active>×</PlayerBatsu>
         }
         return (
             <Lplayer>
