@@ -9,18 +9,17 @@ const Lresult = styled.div`
 `;
 const ResultMain = styled.div`
 `; 
+const condition = {
+    playing: "processing",
+    win: "win!",
+    draw: "draw"
+}
+const activePlayer = {
+    maru: '○',
+    batsu: '×'
+}
 
 function Result(props) {
-    const condition = {
-        playing: "processing",
-        win: "win!",
-        draw: "draw"
-    }
-    const activePlayer = {
-        maru: '○',
-        batsu: '×'
-    }
-
     let status;
     if(props.exceed){
             status = condition.playing
@@ -42,45 +41,5 @@ function Result(props) {
         </Lresult>
     );
 };
-
-
-// class Result extends React.Component {
-//     constructor(props) {
-//         super(props);
-//     }
-//     render() {
-//         const condition = {
-//             playing: "processing",
-//             win: "win!",
-//             draw: "draw"
-//         }
-//         const activePlayer = {
-//             maru: '○',
-//             batsu: '×'
-//         }
-//         let status;
-
-//         if (this.props.exceed) {
-//             status = condition.playing
-//             if (this.props.count === 9) {
-//                 status = condition.draw
-//             }
-//         } else {
-//             if (this.props.xIsNext) {
-//                 status = activePlayer.batsu + condition.win
-//             } else {
-//                 status = activePlayer.maru + condition.win
-//             }
-//         }
-
-//         return (
-//             <div className="l-result">
-//                 <div className="result">
-//                     {status}
-//                 </div>
-//             </div>
-//         );
-//     };
-// }
 
 export default Result;
