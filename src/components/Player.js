@@ -20,17 +20,10 @@ const PlayerBatsu = styled.div`
 function Player(props){
         
     const check = props.xIsNext
-    let maruPlayer = <PlayerMaru active>○</PlayerMaru>
-    let batsuPlayer = <PlayerBatsu>×</PlayerBatsu>
-
-        if (!check) {
-            maruPlayer = <PlayerMaru>○</PlayerMaru>
-            batsuPlayer = <PlayerBatsu active>×</PlayerBatsu>
-        }
         return (
             <Lplayer>
-                {maruPlayer}
-                {batsuPlayer}
+                <PlayerMaru active={check}>○</PlayerMaru>
+                <PlayerBatsu active={!check}>×</PlayerBatsu>
             </Lplayer>
         );
     };

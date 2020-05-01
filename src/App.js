@@ -38,7 +38,7 @@ class App extends React.Component {
   constructor(props) {
     const { squares, xIsNext, count, exceed } = initalState
     super(props);
-    this.state={
+    this.state = {
       squares, 
       xIsNext, 
       count, 
@@ -46,13 +46,13 @@ class App extends React.Component {
     };
   };
 
-  handleClick=(i) => {
-    const squares = this.state.squares.slice();
+  handleClick = (i) => {
+    const squares = [...this.state.squares];
     const {
       xIsNext,
       exceed,
       count
-    }= this.state
+    } = this.state
 
     //プレー続行判定、同じ場所か判定
     if (!exceed || squares[i]) {

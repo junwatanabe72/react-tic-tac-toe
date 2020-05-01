@@ -1,5 +1,5 @@
 import React from 'react';
-import Cell from './Cell';
+import Cells from './Cells';
 import styled from 'styled-components';
 
 
@@ -20,7 +20,7 @@ function Board (props) {
         <Blank>
             <Lboard>
                 <Table>
-                    <Cell squares={squares} xIsNext={xIsNext} count={count} handleClick={handleClick} />
+                    <Cells squares={squares} xIsNext={xIsNext} count={count} handleClick={handleClick} />
                 </Table>
             </Lboard>
         </Blank>
